@@ -1,0 +1,56 @@
+=================================================================
+  TED Talks Recommendation System – EDA Report (Phase 1)
+=================================================================
+
+
+── Dataset Dimensions ──────────────────────────────────────────
+
+  Raw dataset     : 500 rows × 13 columns
+  Processed dataset: 186 rows × 23 columns
+
+── Missing Value Summary ───────────────────────────────────────
+
+  No missing values in the processed dataset.
+
+── Numeric Feature Summary ─────────────────────────────────────
+
+                       count          mean           std      min      median         max
+duration_minutes       186.0  1.297312e+01  5.481599e+00     4.00      14.000        22.0
+views                  186.0  1.251821e+06  3.678790e+06  8693.00  445862.500  44827000.0
+average_rating         186.0  4.238065e+00  4.508233e-01     3.51       4.205         5.0
+num_ratings            186.0  2.800694e+03  8.726744e+03    69.00    1151.500    111667.0
+transcript_word_count  186.0  4.022581e+01  1.143785e+01     0.00      40.000        54.0
+tag_count              186.0  5.774194e+00  1.712460e+00     0.00       6.000         8.0
+
+── Top 10 Topics  ('topic') ────────────────────────────────────
+
+  Education                        10 talks
+  Economics                        10 talks
+  Artificial Intelligence          10 talks
+  Politics                         10 talks
+  Business                         10 talks
+  Environment                      10 talks
+  Health                           10 talks
+  Climate                          10 talks
+  Biology                          10 talks
+  Technology                       10 talks
+
+── Year Range ──────────────────────────────────────────────────
+
+  Earliest: 2006  –  Latest: 2023
+  Mode year: 2022
+
+── Tag Statistics ──────────────────────────────────────────────
+
+  Mean tags per talk  : 5.8
+  Median tags per talk: 6
+  Max tags on one talk: 8
+  Talks with 0 tags   : 6
+
+── Data Quality Verdict ────────────────────────────────────────
+
+  GOOD – Missing values < 5 % across all columns.
+
+=================================================================
+  End of Report
+=================================================================

@@ -1,0 +1,79 @@
+=================================================================
+  TED Talks Recommendation System – Feature Engineering Report
+  Module 3 (Milestone 2, Phase 2)
+=================================================================
+
+  Processed dataset : 186 talks × 23 features
+
+
+── 1. TF-IDF Vectorization ─────────────────────────────────────
+
+  Method : Term Frequency–Inverse Document Frequency
+  Library: scikit-learn TfidfVectorizer
+  Parameters:
+    • max_features = 5000
+    • ngram_range  = (1, 2)  [unigrams + bigrams]
+    • min_df = 1  (keep terms in at least 1 doc)
+    • max_df = 0.85  (drop terms in > 85% of docs)
+    • sublinear_tf = True  (1 + log(tf))
+    • norm = 'l2'
+
+  'tfidf_combined':
+    Matrix shape  : (186, 1816)
+    Vocabulary    : 1816 terms
+    Sparsity      : 0.9506
+  'tfidf_tags':
+    Matrix shape  : (186, 39)
+    Vocabulary    : 39 terms
+    Sparsity      : 0.8409
+  'tfidf_transcript':
+    Matrix shape  : (186, 744)
+    Vocabulary    : 744 terms
+    Sparsity      : 0.9091
+
+── 3. Cosine Similarity Matrices ───────────────────────────────
+
+  Method : linear_kernel (equivalent to cosine for L2-normalized)
+  'combined':
+    Shape            : (186, 186)
+    Mean similarity  : 0.1101
+    Std similarity   : 0.0866
+    Min / Max (excl diag): 0.0000 / 0.6641
+  'tags':
+    Shape            : (186, 186)
+    Mean similarity  : 0.1549
+    Std similarity   : 0.1450
+    Min / Max (excl diag): 0.0000 / 0.8031
+  'transcript':
+    Shape            : (186, 186)
+    Mean similarity  : 0.1445
+    Std similarity   : 0.1357
+    Min / Max (excl diag): 0.0000 / 0.7896
+
+── 4. User–Item Interaction Matrix ─────────────────────────────
+
+  Shape             : (100, 186)
+  Total interactions: 1248
+  Avg watches/user  : 12.5
+  Sparsity          : 0.9329
+  Method            : Simulated — each user assigned 2-4
+                      preferred topics, watches 5-20 talks
+                      weighted by view count
+
+── 5. Saved Artifacts ──────────────────────────────────────────
+
+  data/models/
+    • similarity_combined.npy
+    • similarity_tags.npy
+    • similarity_transcript.npy
+    • tfidf_combined_matrix.npz
+    • tfidf_combined_vectorizer.pkl
+    • tfidf_tags_matrix.npz
+    • tfidf_tags_vectorizer.pkl
+    • tfidf_transcript_matrix.npz
+    • tfidf_transcript_vectorizer.pkl
+    • user_item_matrix.npz
+
+=================================================================
+  End of Report
+=================================================================

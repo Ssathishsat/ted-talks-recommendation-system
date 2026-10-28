@@ -54,7 +54,7 @@
   'svd_combined':
     Reduced shape : (440, 100)
     Components     : 100
-    Var explained  : 0.6573 (65.7%)
+    Var explained  : 0.6572 (65.7%)
   'svd_transcript':
     Reduced shape : (440, 50)
     Components     : 50
@@ -66,9 +66,9 @@
 
   'combined':
     Shape            : (440, 440)
-    Mean similarity  : 0.1068
-    Std similarity   : 0.1022
-    Min / Max (excl diag): 0.0000 / 0.6399
+    Mean similarity  : 0.1067
+    Std similarity   : 0.1020
+    Min / Max (excl diag): 0.0000 / 0.6449
   'tags':
     Shape            : (440, 440)
     Mean similarity  : 0.0676
@@ -81,14 +81,14 @@
     Min / Max (excl diag): 0.0000 / 0.7749
   'svd_combined':
     Shape            : (440, 440)
-    Mean similarity  : 0.1549
-    Std similarity   : 0.1520
-    Min / Max (excl diag): -0.0672 / 0.8547
+    Mean similarity  : 0.1548
+    Std similarity   : 0.1519
+    Min / Max (excl diag): -0.0743 / 0.8559
   'hybrid':
     Shape            : (440, 440)
     Mean similarity  : 0.1063
-    Std similarity   : 0.0952
-    Min / Max (excl diag): 0.0000 / 0.6230
+    Std similarity   : 0.0951
+    Min / Max (excl diag): 0.0000 / 0.6120
 
 ── 6. User–Item Interaction Matrix ─────────────────────────────
 

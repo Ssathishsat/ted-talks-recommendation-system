@@ -1,6 +1,6 @@
 =================================================================
   TED Talks Recommendation System – Feature Engineering Report
-  Module 3 (Milestone 2, Phase 2)
+  Module 3 (Milestone 2, Phase 2) — Enhanced
 =================================================================
 
   Processed dataset : 440 talks × 39 features
@@ -13,10 +13,8 @@
   Parameters:
     • max_features = 5000
     • ngram_range  = (1, 2)  [unigrams + bigrams]
-    • min_df = 1  (keep terms in at least 1 doc)
-    • max_df = 0.85  (drop terms in > 85% of docs)
-    • sublinear_tf = True  (1 + log(tf))
-    • norm = 'l2'
+    • min_df = 1, max_df = 0.85
+    • sublinear_tf = True, norm = 'l2'
 
   'tfidf_combined':
     Matrix shape  : (440, 5000)
@@ -30,10 +28,42 @@
     Matrix shape  : (440, 2364)
     Vocabulary    : 2364 terms
     Sparsity      : 0.9348
+  'tfidf_title':
+    Matrix shape  : (440, 52)
+    Vocabulary    : 52 terms
+    Sparsity      : 0.9509
+  'tfidf_description':
+    Matrix shape  : (440, 91)
+    Vocabulary    : 91 terms
+    Sparsity      : 0.9634
 
-── 3. Cosine Similarity Matrices ───────────────────────────────
+── 2. Bag of Words (CountVectorizer) ───────────────────────────
 
-  Method : linear_kernel (equivalent to cosine for L2-normalized)
+  Method : Raw term counts (for comparison with TF-IDF)
+  Library: scikit-learn CountVectorizer
+
+  'bow_combined':
+    Matrix shape  : (440, 5000)
+    Vocabulary    : 5000 terms
+
+── 3. SVD / LSA Dimensionality Reduction ───────────────────────
+
+  Method : Truncated SVD (Latent Semantic Analysis)
+  Library: scikit-learn TruncatedSVD
+
+  'svd_combined':
+    Reduced shape : (440, 100)
+    Components     : 100
+    Var explained  : 0.6573 (65.7%)
+  'svd_transcript':
+    Reduced shape : (440, 50)
+    Components     : 50
+    Var explained  : 0.6612 (66.1%)
+
+── 5. Cosine Similarity Matrices ───────────────────────────────
+
+  Method : linear_kernel (cosine for L2-normalized vectors)
+
   'combined':
     Shape            : (440, 440)
     Mean similarity  : 0.1068
@@ -49,30 +79,58 @@
     Mean similarity  : 0.1314
     Std similarity   : 0.1376
     Min / Max (excl diag): 0.0000 / 0.7749
+  'svd_combined':
+    Shape            : (440, 440)
+    Mean similarity  : 0.1549
+    Std similarity   : 0.1520
+    Min / Max (excl diag): -0.0672 / 0.8547
+  'hybrid':
+    Shape            : (440, 440)
+    Mean similarity  : 0.1063
+    Std similarity   : 0.0952
+    Min / Max (excl diag): 0.0000 / 0.6230
 
-── 4. User–Item Interaction Matrix ─────────────────────────────
+── 6. User–Item Interaction Matrix ─────────────────────────────
 
   Shape             : (100, 440)
-  Total interactions: 1182
-  Avg watches/user  : 11.8
-  Sparsity          : 0.9731
-  Method            : Simulated — each user assigned 2-4
-                      preferred topics, watches 5-20 talks
-                      weighted by view count
+  Total interactions: 1273
+  Avg watches/user  : 12.7
+  Sparsity          : 0.9711
+  Avg rating        : 3.97
+  Rating range      : 2.3 - 5.0
+  Method            : Simulated with demographics —
+                      200 users with age, country, gender,
+                      preferred topics. Watches 5-20 talks
+                      weighted by views. Ratings based on
+                      talk's average rating + user noise.
 
-── 5. Saved Artifacts ──────────────────────────────────────────
+── 7. Saved Artifacts ──────────────────────────────────────────
 
   data/models/
+    • bow_combined_matrix.npz
+    • bow_combined_vectorizer.pkl
     • similarity_combined.npy
+    • similarity_hybrid.npy
+    • similarity_svd_combined.npy
     • similarity_tags.npy
     • similarity_transcript.npy
+    • svd_combined_model.pkl
+    • svd_combined_reduced.npy
+    • svd_transcript_model.pkl
+    • svd_transcript_reduced.npy
     • tfidf_combined_matrix.npz
     • tfidf_combined_vectorizer.pkl
+    • tfidf_description_matrix.npz
+    • tfidf_description_vectorizer.pkl
     • tfidf_tags_matrix.npz
     • tfidf_tags_vectorizer.pkl
+    • tfidf_title_matrix.npz
+    • tfidf_title_vectorizer.pkl
     • tfidf_transcript_matrix.npz
     • tfidf_transcript_vectorizer.pkl
+    • user_item_binary.npz
     • user_item_matrix.npz
+    • user_profiles.csv
 
 =================================================================
   End of Report

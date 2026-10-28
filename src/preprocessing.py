@@ -231,6 +231,98 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
         print(f"[PREPROCESS] '{topic_col}' encoded: "
               f"{df[topic_col].nunique()} unique categories.")
 
+    # ── 9. Encode speaker (for collaborative filtering) ─────────────────────
+    speaker_col = _find_col(df, ["speaker_name", "speaker", "main_speaker"])
+    if speaker_col:
+        df["speaker_encoded"] = df[speaker_col].astype("category").cat.codes
+        print(f"[PREPROCESS] Speaker encoded: "
+              f"{df[speaker_col].nunique()} unique speakers.")
+
+    # ── 10. Parse ratings dictionary ────────────────────────────────────────
+    ratings_col = _find_col(df, ["ratings"])
+    if ratings_col:
+        try:
+            import ast
+            df["_ratings_parsed"] = df[ratings_col].apply(
+                lambda x: ast.literal_eval(x) if isinstance(x, str) and x.strip() else {}
+            )
+            # Extract top rating category and its count
+            def _top_rating(ratings_dict):
+                if not ratings_dict or not isinstance(ratings_dict, dict):
+                    return ("unknown", 0)
+                top = max(ratings_dict.items(), key=lambda x: x[1])
+                return top
+            rating_results = df["_ratings_parsed"].apply(_top_rating)
+            df["top_rating_category"] = rating_results.apply(lambda x: x[0])
+            df["top_rating_count"] = rating_results.apply(lambda x: x[1])
+            df.drop(columns=["_ratings_parsed"], inplace=True)
+            print(f"[PREPROCESS] Ratings parsed: "
+                  f"{df['top_rating_category'].nunique()} unique categories.")
+        except Exception:
+            print("[PREPROCESS] Could not parse ratings column — skipping.")
+
+    # ── 11. Encode event ────────────────────────────────────────────────────
+    event_col = _find_col(df, ["event"])
+    if event_col:
+        df["event_encoded"] = df[event_col].astype("category").cat.codes
+        print(f"[PREPROCESS] Event encoded: "
+              f"{df[event_col].nunique()} unique events.")
+
+    # ── 12. Language encoding ──────────────────────────────────────────────
+    lang_col = _find_col(df, ["language"])
+    if lang_col:
+        df["language_encoded"] = df[lang_col].astype("category").cat.codes
+        print(f"[PREPROCESS] Language encoded: "
+              f"{df[lang_col].nunique()} unique languages.")
+
+    # ── 13. Popularity score (weighted combination) ─────────────────────────
+    if "views" in df.columns and "average_rating" in df.columns:
+        # Normalize views to 0-1
+        views_norm = (df["views"] - df["views"].min()) / (df["views"].max() - df["views"].min() + 1)
+        rating_norm = (df["average_rating"] - df["average_rating"].min()) / (df["average_rating"].max() - df["average_rating"].min() + 1)
+        df["popularity_score"] = (0.6 * views_norm + 0.4 * rating_norm).round(4)
+        print(f"[PREPROCESS] Popularity score created (60% views + 40% rating).")
+
+    # ── 14. Engagement ratio ───────────────────────────────────────────────
+    if "comments" in df.columns and "views" in df.columns:
+        df["engagement_ratio"] = (df["comments"] / (df["views"] + 1)).round(6)
+        print(f"[PREPROCESS] Engagement ratio created (comments / views).")
+
+    # ── 15. Description sentiment (simple polarity) ────────────────────────
+    if "description_clean" in df.columns:
+        positive_words = {"remarkable", "amazing", "inspiring", "powerful",
+                         "transformative", "innovative", "fascinating",
+                         "breakthrough", "revolutionary", "incredible",
+                         "extraordinary", "brilliant", "pioneering"}
+        negative_words = {"challenge", "problem", "crisis", "concerning",
+                         "difficult", "struggling", "failing", "broken"}
+        def _simple_sentiment(text):
+            if not text:
+                return 0.0
+            tokens = set(text.split())
+            pos = len(tokens & positive_words)
+            neg = len(tokens & negative_words)
+            return round((pos - neg) / max(len(tokens), 1), 4)
+        df["description_sentiment"] = df["description_clean"].apply(_simple_sentiment)
+        print(f"[PREPROCESS] Description sentiment created.")
+
+    # ── 16. Transcript diversity (unique words / total words) ──────────────
+    if "transcript_clean" in df.columns:
+        def _lexical_diversity(text):
+            if not text:
+                return 0.0
+            tokens = text.split()
+            return round(len(set(tokens)) / max(len(tokens), 1), 4)
+        df["lexical_diversity"] = df["transcript_clean"].apply(_lexical_diversity)
+        print(f"[PREPROCESS] Lexical diversity created (unique/total word ratio).")
+
+    # ── 17. Content richness (combined text length) ───────────────────────
+    if "combined_text" in df.columns:
+        df["content_length"] = df["combined_text"].apply(
+            lambda t: len(t.split()) if t else 0
+        )
+        print(f"[PREPROCESS] Content length created (total words in combined text).")
+
     print(f"[PREPROCESS] ✓ Done. Final shape: {df.shape}")
     return df
 

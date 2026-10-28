@@ -77,8 +77,21 @@ TOPICS = [
     "Environment", "Psychology", "Arts", "Politics", "Society",
     "Innovation", "Design", "Philosophy", "Economics", "Space",
     "Biology", "Neuroscience", "Artificial Intelligence", "Climate",
-    "Culture",
+    "Culture", "Music", "History", "Mathematics", "Law",
+    "Sustainability", "Mental Health", "Robotics", "Data Science",
+    "Architecture", "Literature",
 ]
+
+EVENTS = [
+    "TED2006", "TED2007", "TED2008", "TED2009", "TED2010",
+    "TED2011", "TED2012", "TED2013", "TED2014", "TED2015",
+    "TED2016", "TED2017", "TED2018", "TED2019", "TED2020",
+    "TED2021", "TED2022", "TED2023", "TEDGlobal", "TEDx",
+    "TED Salon", "TED Residency", "TED Countdown", "TED Women",
+]
+
+LANGUAGES = ["English", "English", "English", "English", "English",
+             "Spanish", "French", "Portuguese", "Arabic", "Chinese"]
 
 TAGS_POOL = [
     "ai", "machine learning", "deep learning", "neuroscience", "brain",
@@ -88,6 +101,23 @@ TAGS_POOL = [
     "technology", "design", "business", "economics", "politics",
     "space", "biology", "evolution", "language", "communication",
     "environment", "energy", "data", "privacy", "ethics",
+    "robotics", "quantum computing", "blockchain", "virtual reality",
+    "mental health", "wellness", "mindfulness", "storytelling",
+    "social media", "globalization", "human rights", "gender",
+    "race", "inequality", "poverty", "nutrition", "fitness",
+    "aging", "genetics", "crispr", "biotech", "nanotechnology",
+    "renewable energy", "solar", "battery", "carbon capture",
+    "ocean", "biodiversity", "agriculture", "food security",
+    "urban planning", "transportation", "automation", "future of work",
+    "education reform", "online learning", "critical thinking",
+    "philosophy", "ethics", "morality", "consciousness",
+    "music", "art", "poetry", "writing", "film",
+    "history", "archaeology", "anthropology", "religion",
+    "mathematics", "statistics", "probability", "algorithms",
+    "law", "justice", "democracy", "governance",
+    "collaboration", "teamwork", "productivity", "motivation",
+    "happiness", "resilience", "grit", "compassion",
+    "tedx", "ted talk", "inspiring", "informative", "perspective",
 ]
 
 FIRST_NAMES = [
@@ -113,7 +143,18 @@ TRANSCRIPT_TEMPLATES = [
         "{topic} is fundamentally changing the way we think about {related}. "
         "Let me share three key insights. First, {insight1}. "
         "Second, {insight2}. Third, {insight3}. "
-        "If we embrace these ideas, we can build a better future."
+        "Let me give you a concrete example. In our lab, we tested this idea "
+        "with {example_group}. The results were striking. "
+        "{example_detail} "
+        "This tells us something profound about {topic}. "
+        "When we look at the broader picture, we see that {insight4}. "
+        "And this is not just theory. Real world applications are already emerging. "
+        "Companies and institutions are starting to adopt these principles. "
+        "The implications for {related} are enormous. "
+        "If we embrace these ideas, we can build a better future. "
+        "But it requires courage, collaboration, and a willingness to change. "
+        "So I ask you today: what role will you play in shaping the future of {topic}? "
+        "Thank you."
     ),
     (
         "Imagine a world where {topic} is accessible to everyone. "
@@ -121,15 +162,72 @@ TRANSCRIPT_TEMPLATES = [
         "at a tipping point. The data shows that {insight1}. "
         "But more importantly, {insight2}. "
         "Our research in {related} confirms that {insight3}. "
-        "The question is not whether this will happen, but when."
+        "Consider this: when we surveyed {example_group}, we discovered that "
+        "{example_detail} "
+        "This is not an isolated finding. Across multiple studies, the pattern holds. "
+        "{insight4} "
+        "Now, you might be wondering: how do we get there? "
+        "The answer is both simple and complex. It starts with {insight5}. "
+        "Then we need investment, policy changes, and public engagement. "
+        "The technology is ready. The question is not whether this will happen, but when. "
+        "And the when depends on all of us in this room today."
     ),
     (
         "I grew up fascinated by {topic}. "
         "As a researcher in {related}, I have seen first-hand how {insight1}. "
         "Over {years} years of work, my team discovered that {insight2}. "
         "This has profound implications. {insight3}. "
-        "We must act now to shape the future of {topic}."
+        "Let me walk you through what we found. "
+        "We worked with {example_group} over a period of several months. "
+        "{example_detail} "
+        "What surprised us most was {insight4}. "
+        "It challenges everything we thought we knew about {topic}. "
+        "We published our findings and the response was overwhelming. "
+        "Researchers from {n_countries} countries reached out to collaborate. "
+        "Together, we are now building a global network focused on {topic}. "
+        "The future is not something we wait for. It is something we create. "
+        "We must act now to shape the future of {topic}. "
+        "Thank you for listening."
     ),
+    (
+        "Let me start with a question. What if everything we know about {topic} is wrong? "
+        "That is the question I asked myself {years} years ago. "
+        "And it led me down a path I never expected. "
+        "Working in {related}, I began to notice patterns that did not fit "
+        "the conventional wisdom. {insight1}. "
+        "So my team and I decided to dig deeper. "
+        "We collected data from {example_group}. "
+        "{example_detail} "
+        "What we found changed my perspective entirely. {insight2}. "
+        "And it gets more interesting. {insight3}. "
+        "When we shared our results, some people were skeptical. That is fair. "
+        "But the evidence is compelling. {insight4}. "
+        "I believe we are standing at the beginning of a revolution in {topic}. "
+        "Not a violent one, but a revolution of ideas. "
+        "The kind that reshapes how we see the world and our place in it. "
+        "So I leave you with this thought: the future of {topic} is not written. "
+        "It is being written right now, by people like you. "
+        "Thank you."
+    ),
+]
+
+EXAMPLE_GROUPS = [
+    "a group of 500 volunteers", "students across 12 universities",
+    "professionals from 30 companies", "a community of 1000 participants",
+    "patients in a clinical trial", "citizens from 5 different cities",
+    "a team of 200 researchers", "children in 15 schools",
+    "workers across 3 industries", "a diverse group of 800 individuals",
+]
+
+EXAMPLE_DETAILS = [
+    "Those who adopted the new approach showed a 40% improvement in outcomes.",
+    "The data revealed clear patterns that contradicted existing assumptions.",
+    "Participants reported significantly higher satisfaction and engagement.",
+    "The intervention reduced error rates by more than half within six months.",
+    "We observed measurable behavioural changes that persisted over time.",
+    "The results were consistent across age groups, genders, and backgrounds.",
+    "Productivity increased by 35% without any additional resources required.",
+    "The approach proved scalable and cost-effective in real-world settings.",
 ]
 
 INSIGHTS = [
@@ -143,6 +241,14 @@ INSIGHTS = [
     "empathy is a trainable skill with measurable outcomes",
     "renewable energy is now cheaper than fossil fuels in many regions",
     "micro-habits compound into macro-level change over time",
+    "the brain has remarkable capacity to rewire itself at any age",
+    "storytelling activates multiple brain regions simultaneously",
+    "most decisions are made emotionally and justified rationally afterwards",
+    "sleep deprivation impairs judgment as much as alcohol intoxication",
+    "exposure to nature reduces stress hormones within minutes",
+    "social connections are the strongest predictor of long-term happiness",
+    "practice alone does not make perfect — deliberate practice does",
+    "the most innovative ideas often come from outside the field",
 ]
 
 RELATEDS = [
@@ -150,7 +256,27 @@ RELATEDS = [
     "public health", "economic theory", "social psychology",
     "computational biology", "human-computer interaction",
     "behavioural economics", "evolutionary biology",
+    "neural networks", "sustainable development", "public policy",
+    "organizational behavior", "educational technology",
+    "behavioral neuroscience", "environmental science",
+    "digital transformation", "social innovation", "systems thinking",
 ]
+
+RATING_CATEGORIES = {
+    "inspiring": (0.15, 0.35),
+    "informative": (0.20, 0.40),
+    "funny": (0.05, 0.20),
+    "persuasive": (0.15, 0.30),
+    "fascinating": (0.10, 0.30),
+    "beautiful": (0.05, 0.15),
+    "courageous": (0.05, 0.15),
+    "ingenious": (0.05, 0.20),
+    "ok": (0.01, 0.05),
+    "confusing": (0.01, 0.05),
+    "jaw-dropping": (0.05, 0.15),
+    "longwinded": (0.01, 0.05),
+    "obnoxious": (0.01, 0.03),
+}
 
 
 def _make_transcript(topic: str, rng: random.Random) -> str:
@@ -162,6 +288,11 @@ def _make_transcript(topic: str, rng: random.Random) -> str:
         insight1=rng.choice(INSIGHTS),
         insight2=rng.choice(INSIGHTS),
         insight3=rng.choice(INSIGHTS),
+        insight4=rng.choice(INSIGHTS),
+        insight5=rng.choice(INSIGHTS),
+        example_group=rng.choice(EXAMPLE_GROUPS),
+        example_detail=rng.choice(EXAMPLE_DETAILS),
+        n_countries=rng.randint(5, 30),
     )
 
 
@@ -177,11 +308,29 @@ def _make_title(topic: str, rng: random.Random) -> str:
         f"The Hidden Side of {topic}",
         f"{topic}: A New Perspective",
         f"Inside {topic}",
+        f"The Surprising Truth About {topic}",
+        f"What I Learned From {topic}",
+        f"The Art of {topic}",
+        f"{topic} and the Future of Humanity",
+        f"Breaking the Rules of {topic}",
+        f"The Science Behind {topic}",
+        f"Why {topic} is the Most Important Conversation Today",
     ]
     return rng.choice(prefixes)
 
 
-def generate_synthetic_dataset(n_talks: int = 500, n_users: int = 200,
+def _make_ratings(rng: random.Random) -> dict:
+    """Generate realistic rating counts for each rating category."""
+    ratings = {}
+    for cat, (lo, hi) in RATING_CATEGORIES.items():
+        # Higher total for popular talks
+        base = int(np.random.lognormal(6, 1.5))
+        count = int(base * rng.uniform(lo, hi))
+        ratings[cat] = max(count, 0)
+    return ratings
+
+
+def generate_synthetic_dataset(n_talks: int = 1000, n_users: int = 200,
                                 seed: int = 42) -> pd.DataFrame:
     """
     Build a realistic synthetic TED Talks dataset.
@@ -209,38 +358,63 @@ def generate_synthetic_dataset(n_talks: int = 500, n_users: int = 200,
         first = rng.choice(FIRST_NAMES)
         last = rng.choice(LAST_NAMES)
         speaker = f"{first} {last}"
+        event = rng.choice(EVENTS)
+        language = rng.choice(LANGUAGES)
         year = rng.randint(2006, 2023)
         month = rng.randint(1, 12)
-        duration = rng.randint(4, 22)          # minutes
+        day = rng.randint(1, 28)
+        duration = rng.randint(4, 25)          # minutes
         views = int(np.random.lognormal(13, 1.5))
-        rating = round(rng.uniform(3.5, 5.0), 2)
+        rating = round(rng.uniform(3.0, 5.0), 2)
         num_ratings = int(np.random.lognormal(7, 1.2))
+        comments = int(np.random.lognormal(5, 1.3))
+
         tags = list({topic.lower().replace(" ", "_")}
-                    | set(rng.sample(TAGS_POOL, k=rng.randint(3, 7))))
+                    | set(rng.sample(TAGS_POOL, k=rng.randint(3, 10))))
 
         transcript = _make_transcript(topic, rng)
         # Occasionally drop transcript to simulate missing data
-        if rng.random() < 0.05:
+        if rng.random() < 0.04:
             transcript = np.nan
 
         # Occasionally drop tags
-        tag_str = ", ".join(tags) if rng.random() > 0.03 else np.nan
+        tag_str = ", ".join(tags) if rng.random() > 0.02 else np.nan
+
+        # Generate rating breakdown
+        ratings = _make_ratings(rng)
+
+        # Speaker occupation
+        occupations = [
+            f"Professor of {topic}", f"{topic} Researcher", f"{topic} Expert",
+            f"Author and {topic} Specialist", f"Director of {topic} Institute",
+            f"Founder, {topic} Initiative", f"Chief {topic} Officer",
+            f"Senior {topic} Analyst", f"{topic} Consultant",
+            f"Entrepreneur in {topic}", f"Journalist covering {topic}",
+            f"Activist for {topic}", f"Pioneer in {topic}",
+        ]
+        speaker_occupation = rng.choice(occupations)
 
         rows.append({
             "talk_id": i,
             "title": _make_title(topic, rng),
             "speaker_name": speaker,
+            "speaker_occupation": speaker_occupation,
             "description": (
                 f"A talk by {speaker} exploring the frontiers of {topic.lower()}. "
-                f"Filmed at TED {year}."
+                f"Filmed at {event}."
             ),
             "tags": tag_str,
             "topic": topic,
-            "film_date": f"{year}-{month:02d}-01",
+            "event": event,
+            "language": language,
+            "film_date": f"{year}-{month:02d}-{day:02d}",
+            "published_date": f"{year}-{month:02d}-{day:02d}",
             "duration_minutes": duration,
             "views": views,
             "average_rating": rating,
             "num_ratings": num_ratings,
+            "comments": comments,
+            "ratings": str(ratings),
             "transcript": transcript,
             "url": f"https://www.ted.com/talks/talk_{i}",
         })
